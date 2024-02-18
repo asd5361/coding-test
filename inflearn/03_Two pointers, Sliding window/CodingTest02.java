@@ -22,7 +22,6 @@ public class CodingTest02 {
         //두번째 줄 배열
         List<Integer> sArr = new ArrayList<>();
         for (int i = 0; i < sCnt; i++) {
-
             sArr.add(scanner.nextInt());
         }
 
@@ -30,13 +29,33 @@ public class CodingTest02 {
         Collections.sort(fArr);
         Collections.sort(sArr);
 
-        //공통요소 찾기
-        for (int i = 0; i < fArr.size(); i++) {
-            for (int j = 0; j < sArr.size(); j++) {
-                if(fArr.get(i).equals(sArr.get(j)) ){
-                    System.out.print(sArr.get(j)+" ");
-                }
+        //투포인터
+        int first =0;
+        int secend =0;
+        List<Integer> result = new ArrayList<>();
+
+        //첫번째 포인터와 두번째 포인터가 배열이 길이보다 작을 때만
+        while (first<fCnt && secend<sCnt){
+
+            //두 배열의 포인터 위치의 배열 값이 같을 때
+            if(fArr.get(first).equals(sArr.get(secend))){
+                result.add(fArr.get(first));
+                first++;
+                secend++;
+
+            // 첫번째 배열의 포인터 위치의 배열 값이 클때 두번째 포인터 값 올리기, 아니면 첫번째 포인터 값 올리기
+            }else if(fArr.get(first)>sArr.get(secend)){
+                secend++;
+            }else {
+                first++;
             }
+        }
+        //결과 배열 정렬
+        Collections.sort(result);
+        
+        //결과 출력
+        for (Integer i : result) {
+            System.out.print(i+" ");
         }
     }
 }
