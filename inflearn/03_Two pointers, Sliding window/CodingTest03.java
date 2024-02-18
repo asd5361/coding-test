@@ -15,23 +15,31 @@ public class CodingTest03 {
             arr.add(scanner.nextInt());
         }
 
-        int max = Integer.MIN_VALUE;
-        //maxCnt 수만큼 앞에서 반복문 시작
-        for (int i = maxCnt-1; i < arrCnt; i++) {
-            int sum=0;
-            //n가 만큼 연속으로 for문 돌리기
-            for (int j =i; j > (i-maxCnt); j--) {
-                sum += arr.get(j);
+        //슬라이드 윈도우
+        int sum =0;
+        int max = 0;
+        boolean flag = false;
+
+        for (int i = 0; i < arrCnt; i++) {
+            //i 가 더해야하는 수의 두번쨰까지의 수와 같을 때 flag을 참으로 바꿈
+            if(i == maxCnt-1){
+                flag =true;
             }
-            // 최댓값이 더한 값보다 작으면 값 대입하기
-            if(max < sum){
+            // i 가 더해야하는 수보다 크거나 같을 때 총합에서 (i-더해야하는 수) 위치의 배열 값을 빼준다.
+            if(i >= maxCnt){
+                sum -= arr.get(i-maxCnt);
+            }
+            // 총합에 i번째 배열의 값을 더해준다.
+            sum += arr.get(i);
+
+            //합한 수가 max 수보다 크고 flag가 참일 때 max값에 합한 수를 대입한다.
+            if(sum > max && flag){
                 max = sum;
             }
         }
 
         //출력
         System.out.println(max);
-
     }
 }
 /*3.최대 매출
