@@ -15,17 +15,35 @@ public class CodingTest04 {
             arr.add(scanner.nextInt());
         }
 
+        //투 포인트
+        /*
+            시작과 끝을 나타내는 start 변수와 end 변수를 선언 및 초기화
+            값을 더해서 확인할 sum 변수 선언 및 초기화
+         */
+        int start =0;
+        int end =0;
         int sum =0;
-        for (int i = 0; i < arrCnt; i++) {
-            for (int j = i; j < arrCnt; j++) {
-                sum += arr.get(j);
-                if(sum == x){
-                    cnt++;
-                    break;
-                }
+        // while 반복문을 통해 start 값이 end 값보다 작거나 같을 떄까지 반복
+        while (start <= end){
+            //sum값이 x(요구하는 합의 수) 보다 크거나 같을 때 sum 값에서 start+1 해준 위치의 arr배열 값을 빼준다.
+            if(sum >= x){
+                sum -= arr.get(start++);
+
+            //end 값이 배열의 길이와 같을 떼 (배열을 다 돌았을 때) while문 나가기
+            }else if(end==arrCnt){
+                break;
+
+            //위 조건이 아닐 때 sum 값에 arr배열 end+1 번째 값을 더한다.
+            }else{
+                sum += arr.get(end++);
             }
-            sum =0;
+
+            //sum 값과 요구하는 합의 값과 같으면 cnt+1 추가한다.
+            if(sum==x){
+                cnt++;
+            }
         }
+
         System.out.println(cnt);
 
     }
